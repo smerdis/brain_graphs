@@ -228,7 +228,9 @@ def load_subject_time_series(subject_path,scrub_mm=False,incl_timepoints=None):
 			if scrub_mm != False:
 				subject_time_series_data = np.delete(subject_time_series_data,np.where(remove_array==True),axis=3)
 			if incl_timepoints is not None: # include only the supplied timepoints
-				i_tps = np.zeros(len(subject_time_series_data))
+				i_tps = np.zeros(subject_time_series_data.shape[-1])
+				print type(subject_time_series_data)
+				print i_tps.shape
 				i_tps[incl_timepoints] = 1
 				subject_time_series_data = np.delete(subject_time_series_data,np.where(i_tps==0),axis=3)
 			continue
@@ -236,7 +238,7 @@ def load_subject_time_series(subject_path,scrub_mm=False,incl_timepoints=None):
 		if scrub_mm != False:
 			new_subject_time_series_data = np.delete(new_subject_time_series_data,np.where(remove_array==True),axis=3)
 		if incl_timepoints is not None: # include only the supplied timepoints
-			i_tps = np.zeros(len(new_subject_time_series_data))
+			i_tps = np.zeros(new_subject_time_series_data.shape[-1])
 			i_tps[incl_timepoints] = 1
 			new_subject_time_series_data = np.delete(new_subject_time_series_data,np.where(i_tps==0),axis=3)
 		subject_time_series_data = np.concatenate((subject_time_series_data,new_subject_time_series_data),axis =3)
